@@ -1,0 +1,28 @@
+﻿<Properties StartupConfiguration="{707C9122-1CF3-4A51-A75C-EF74EEE71C3F}|Default">
+  <MonoDevelop.Ide.ItemProperties.joshford-project0 FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="joshford-project0/Order.cs">
+    <Files>
+      <File FileName="joshford-project0/Program.cs" Line="13" Column="46" />
+      <File FileName="joshford-project0/Customer.cs" Line="7" Column="9" />
+      <File FileName="joshford-project0/Employee.cs" />
+      <File FileName="joshford-project0/Order.cs" Line="7" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="joshford-project0" expanded="True">
+            <Node name="joshford-project0" expanded="True">
+              <Node name="Order.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

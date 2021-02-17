@@ -2,7 +2,8 @@
 
 namespace joshford_project0.Library
 {
-    public class Class1
+    public class Product_Library
     {
+        Dictionary<Product> productDictionary = new Dictionary<Product>();
     }
 }

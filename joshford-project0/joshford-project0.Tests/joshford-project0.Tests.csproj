@@ -22,5 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\joshford-project0.Library\joshford-project0.Library.csproj" />
+    <ProjectReference Include="..\joshford-project0.csproj" />
   </ItemGroup>
 </Project>

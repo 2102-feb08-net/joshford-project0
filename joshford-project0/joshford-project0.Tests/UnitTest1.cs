@@ -15,6 +15,7 @@ namespace joshford_project0
 
             // Act
             Customer actual = new Customer(custID: 123456);
+            Console.WriteLine(actual.CustID);
 
             // Assert
             Assert.Equal(expected, actual);
@@ -39,7 +40,7 @@ namespace joshford_project0
         /// <summary>
         /// 
         /// </summary>
-        public void testTemplate()
+        public void testTemplate1()
         {
             // Arrange
 
@@ -55,7 +56,7 @@ namespace joshford_project0
         /// <summary>
         /// 
         /// </summary>
-        public void testTemplate()
+        public void testTemplate2()
         {
             // Arrange
 
@@ -71,7 +72,7 @@ namespace joshford_project0
         /// <summary>
         /// 
         /// </summary>
-        public void testTemplate()
+        public void testTemplate3()
         {
             // Arrange
 
@@ -87,7 +88,7 @@ namespace joshford_project0
         /// <summary>
         /// 
         /// </summary>
-        public void testTemplate()
+        public void testTemplate4()
         {
             // Arrange
 
@@ -103,7 +104,7 @@ namespace joshford_project0
         /// <summary>
         /// 
         /// </summary>
-        public void testTemplate()
+        public void testTemplate5()
         {
             // Arrange
 
@@ -119,7 +120,7 @@ namespace joshford_project0
         /// <summary>
         /// 
         /// </summary>
-        public void testTemplate()
+        public void testTemplate6()
         {
             // Arrange
 

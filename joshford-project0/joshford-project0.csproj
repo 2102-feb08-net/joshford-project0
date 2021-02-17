@@ -18,7 +18,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="joshford-project0.Tests\joshford-project0.Tests.csproj" />
     <ProjectReference Include="joshford-project0.Library\joshford-project0.Library.csproj" />
   </ItemGroup>
 </Project>

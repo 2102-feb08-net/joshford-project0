@@ -22,39 +22,18 @@ namespace joshford_project0
         }
 
         /// <summary>
-        /// Set customer name to the name input
+        /// Get and set customer name
         /// </summary>
-        /// <param name="custName"></param>
-        public void SetCustName(string custName)
-        {
-            _custName = custName;
-        }
+        public string CustName { get => _custName; set => _custName = value; }
 
         /// <summary>
-        /// Retrieve customer name for search purposes
+        /// Get and set the customer ID
         /// </summary>
-        /// <returns> string _custName </returns>
-        public string GetCustName()
-        {
-            return _custName;
-        }
+        public int CustID { get => _custID; set => _custID = value; }
 
         /// <summary>
-        /// Set a preferred store location for orders for a customer
+        /// Get and set customer store ID
         /// </summary>
-        /// <param name="storeID"></param>
-        public void SetStoreID(int storeID)
-        {
-            _storeID = storeID;
-        }
-
-        /// <summary>
-        /// Retrieve a customers preferred store location
-        /// </summary>
-        /// <returns> int _storeID </returns>
-        public int GetStoreID()
-        {
-            return _storeID;
-        }
+        public int StoreID { get => _storeID; set => _storeID = value; }
     }
 }

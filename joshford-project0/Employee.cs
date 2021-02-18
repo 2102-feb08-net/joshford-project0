@@ -7,8 +7,8 @@ namespace joshford_project0
     {
         private int _emplID;
         private int _storeID;
-        private double _totalSales = 0.00;
-        private int _totalAmountSales = 0;
+        private double _totalSalesAmount = 0.00;
+        private int _totalSales = 0;
         private Dictionary<DateTime, double> _emplSales = new Dictionary<DateTime, double>();
 
         public Employee(int emplID, int storeID)
@@ -38,8 +38,20 @@ namespace joshford_project0
             _emplSales.Add(purchaseDate, orderTotal);
         }
 
+        /// <summary>
+        /// Returns the employee sales dictionary and prints the dictionary
+        ///     to the screen in the form of statistics
+        /// </summary>
+        /// <returns> Dictionary<DateTime, double> _emplSales </returns>
         public Dictionary<DateTime, double> EmplSaleStatistics()
         {
+            Console.WriteLine("\tEmployee Sales Records:\n");
+            foreach(KeyValuePair<DateTime, double> sale in _emplSales)
+            {
+                Console.WriteLine($"Date: {sale.Key}\tSale Amount: {sale.Value}");
+            }
+            Console.WriteLine($"      \tTotal Sales: {_totalSales}");
+            Console.WriteLine($"      \tTotal Sales Amount: {_totalSalesAmount}");
             return _emplSales;
         }
     }

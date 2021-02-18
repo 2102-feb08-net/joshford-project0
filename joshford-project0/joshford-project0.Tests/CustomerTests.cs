@@ -3,7 +3,7 @@ using Xunit;
 
 namespace joshford_project0
 {
-    public class UnitTest1
+    public class CustomerTests
     {
         [Theory]
         [InlineData(123456)]

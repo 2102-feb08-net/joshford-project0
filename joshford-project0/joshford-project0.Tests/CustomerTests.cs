@@ -6,19 +6,16 @@ namespace joshford_project0
     public class CustomerTests
     {
         [Theory]
-        [InlineData(123456)]
-        [InlineData(654321)]
         public void Customer_ConstructorTest_CustomerCreated(int value)
         {
             // Arrange
-            Customer expected = new Customer(custID: value);
+            
 
             // Act
-            Customer actual = new Customer(custID: 123456);
-            Console.WriteLine(actual.CustID);
+            
 
             // Assert
-            Assert.Equal(expected, actual);
+            
         }
 
         /// <summary>

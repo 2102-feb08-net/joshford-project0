@@ -5,8 +5,8 @@ namespace joshford_project0
 {
     public class CustomerTests
     {
-        [Theory]
-        public void Customer_ConstructorTest_CustomerCreated(int value)
+        [Fact]
+        public void Customer_ConstructorTest_CustomerCreated()
         {
             // Arrange
             

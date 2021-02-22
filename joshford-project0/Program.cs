@@ -67,7 +67,7 @@ namespace joshford_project0
                 Console.WriteLine("Please enter your last name: ");
                 customerLastName = Console.ReadLine();
 
-                Customer nCustomer = new Customer();
+                Customer nCustomer = new Customer(customerFirstName, customerLastName);
 
             }
             

@@ -18,11 +18,13 @@ namespace joshford_project0
         }
 
         // Constructor for customer with store id
+        /*
         public Customer(int custID, int storeID)
         {
             _custID = custID;
             _storeID = storeID;
         }
+        */
 
         /// <summary>
         /// Get and set customer first name

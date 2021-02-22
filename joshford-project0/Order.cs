@@ -5,38 +5,69 @@ namespace joshford_project0
 {
     public class Order
     {
-        private List<string> customerOrder = new List<string>();
-        private int customerOrderPrice = 0;
+        private List<CoffeeTypes> customerCoffee = new List<CoffeeTypes>();
+        private List<FoodTypes> customerFood = new List<FoodTypes>();
+        private double currentOrderTotal = 0.00;
 
         /// <summary>
         /// Retrieve the total order price of the given customers order
         /// </summary>
-        public int GetTotalOrderPrice()
+        public double GetTotalOrderPrice()
         {
-            return customerOrderPrice;
+            return currentOrderTotal;
         }
 
         /// <summary>
         /// Add to the total order price of the given customers order
         /// </summary>
-        public void SetTotalOrderPrice(int itemToAdd)
+        public void SetTotalOrderPrice(double itemToAdd)
         {
-            customerOrderPrice += itemToAdd;
+            currentOrderTotal += itemToAdd;
         }
 
         /// <summary>
-        /// Add to the given customers order
+        /// Add a coffee product to the current customers order
         /// </summary>
         /// <param name="item"></param>
-        public void AddToOrder(string item)
+        public void AddCoffeeToOrder(CoffeeTypes coffeeProduct)
         {
-            customerOrder.Add(item);
+            Coffee coffee = new Coffee();
+
+            customerCoffee.Add(coffeeProduct);
+            this.SetTotalOrderPrice(coffee.GetProductPrice(coffeeProduct));
         }
 
         /// <summary>
-        /// Retrieve the given customers order
+        /// Add a food product to the current customers order
         /// </summary>
-        public List<string> OrderItems { get; }
+        public void AddFoodToOrder(FoodTypes foodProduct)
+        {
+            Food food = new Food();
+
+            customerFood.Add(foodProduct);
+            this.SetTotalOrderPrice(food.GetProductPrice(foodProduct));
+        }
+
+        /// <summary>
+        /// Prints the current coffee products on the current order
+        /// </summary>
+        public void PrintCurrentOrder()
+        {
+            Console.WriteLine("\t--Customer's Current Order--");
+
+            foreach (int index in customerCoffee)
+            {
+                Console.WriteLine($"\t{customerCoffee[index]}\t");
+            }
+
+            foreach (int index in customerFood)
+            {
+                Console.WriteLine($"\t{customerFood[index]}\t");
+            }
+
+            Console.WriteLine($"Current Order Total:\t{currentOrderTotal}");
+
+        }
 
 
     }

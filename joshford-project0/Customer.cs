@@ -8,8 +8,9 @@ namespace joshford_project0
         private int _storeID = 0;
         private string _custFirstName;
         private string _custLastName;
+        private int _phoneNumber;
 
-        // Constructor for customer with no store id
+        // Constructor for new customer with no store id or records
         public Customer(string custFirstName, string custLastName)
         {
             _custFirstName = custFirstName;
@@ -17,14 +18,12 @@ namespace joshford_project0
             _custID = this.CreateNewCustomer();
         }
 
-        // Constructor for customer with store id
-        /*
+        // Constructor for returning customer with customer and store id
         public Customer(int custID, int storeID)
         {
             _custID = custID;
             _storeID = storeID;
         }
-        */
 
         /// <summary>
         /// Get and set customer first name
@@ -45,6 +44,11 @@ namespace joshford_project0
         /// Get and set customer store ID
         /// </summary>
         public int StoreID { get => _storeID; set => _storeID = value; }
+
+        /// <summary>
+        /// Get and set customer phone number(not required)
+        /// </summary>
+        public int PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
 
         public void FormatCustomerName(string custFirstName, string custLastName)
         {

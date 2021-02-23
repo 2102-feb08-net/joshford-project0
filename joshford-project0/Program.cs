@@ -9,7 +9,7 @@ namespace joshford_project0
             
             bool validID = false;           // ID Validation boolean
             bool validResponse = false;     // User input validation boolean
-            string firstOrReturn;           // User input for new or returning customer
+            string newOrReturn;           // User input for new or returning customer
             string customerFirstName;       // Stores first name of new customer
             string customerLastName;        // Stores last name of new customer     
             int customerID = 0;             // Stores the ID of customer
@@ -23,9 +23,9 @@ namespace joshford_project0
             do
             {
                 Console.WriteLine("Please enter 'Y' or 'N'");
-                firstOrReturn = Console.ReadLine().ToUpper();
+                newOrReturn = Console.ReadLine().ToUpper();
 
-                if (firstOrReturn != "Y" || firstOrReturn != "N")
+                if (newOrReturn != "Y" || newOrReturn != "N")
                 {
                     Console.WriteLine("Invalid Response");
                 }
@@ -39,17 +39,17 @@ namespace joshford_project0
 
             // Returning customer will input ID for ID validation
             // New customer will input name, and receive a customer ID
-            if (firstOrReturn == "Y")
+            if (newOrReturn == "Y")
             {
                 Console.WriteLine("Please enter customer ID: ");
                 customerID = int.Parse(Console.ReadLine());
 
                 CustomerValidate customerToValidate = new CustomerValidate();
 
-                // Temporary validation
                 if(customerToValidate.ValidateID(customerID))
                 {
                     validID = true;
+                    Customer rCustomer = new Customer(customerID, storeID);
                 }
 
                 else
@@ -69,9 +69,17 @@ namespace joshford_project0
 
                 Customer nCustomer = new Customer(customerFirstName, customerLastName);
 
+                validID = true;
             }
 
 
+            if (validID)
+            {
+                // Customer UI Initiation
+                // UI will handle Customer interaction(Print menu, get customer
+                //  order, retrieve history, etc.)
+                // LINQ SQL Queries will handle input data
+            }
             
         }
     }

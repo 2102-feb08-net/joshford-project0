@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using joshford_project0.Library;
+
 namespace joshford_project0
 {
     public class CustomerValidate
@@ -19,7 +23,10 @@ namespace joshford_project0
         /// <returns> boolean idIsValid </returns>
         public bool ValidateID(int idToValidate)
         {
-            // Pass idToValidate to SQL query to check against customer table
+            DataAccess_Library dataAccess = new DataAccess_Library();
+            var context = new joshfordproject0Context();
+
+            context = DataAccess_Library.OpenDatabaseConnection();
 
             return idIsValid;
         }

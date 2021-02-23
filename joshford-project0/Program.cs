@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using joshford_project0.Library;
 
 namespace joshford_project0
 {
@@ -17,6 +18,12 @@ namespace joshford_project0
             int customerID = 0;             // Stores the ID of customer
             int employeeID = 0;             // Stores the ID of employee, for order information
             int storeID = 0;                // Stores the ID of the store the order was placed
+
+            // Database Connection is established
+            DataAccess_Library dataAccess = new DataAccess_Library();
+            var context = new joshfordproject0Context();
+
+            context = DataAccess_Library.OpenDatabaseConnection();
 
             // User Interface Begins
             Console.WriteLine("\tWelcome to Rise 'N Grind Cafe!");

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using joshford_project0.Library;
 
 namespace joshford_project0
 {
@@ -28,9 +29,15 @@ namespace joshford_project0
         /// <param name="productToCheck"></param>
         public void CheckProductInventory(Enum productToCheck)
         {
+            DataAccess_Library dataAccess = new DataAccess_Library();
+            var context = new joshfordproject0Context();
+
+            context = DataAccess_Library.OpenDatabaseConnection();
+
             FoodTypes foodInvCheck = (FoodTypes)productToCheck;
             int productAmount = 0;
 
+            // SQL Query for food inventory
 
             Console.WriteLine($"Current amount of {foodInvCheck} is: {productAmount}");
         }
@@ -38,6 +45,11 @@ namespace joshford_project0
 
         public double GetProductPrice(Enum productToPrice)
         {
+            DataAccess_Library dataAccess = new DataAccess_Library();
+            var context = new joshfordproject0Context();
+
+            context = DataAccess_Library.OpenDatabaseConnection();
+
             FoodTypes foodPrice = (FoodTypes) productToPrice;
             double priceOfFood = 0;
 

@@ -3,7 +3,7 @@ using Xunit;
 
 namespace joshford_project0
 {
-    public class CustomerTests
+    public class Project0_Unit_Tests
     {
         [Fact]
         public void Customer_ConstructorTest_CustomerCreated()

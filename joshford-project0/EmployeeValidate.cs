@@ -16,7 +16,7 @@ namespace joshford_project0
         /// </summary>
         /// <param name="idToValidate"></param>
         /// <returns> boolean idIsValid </returns>
-        public bool validateID(int idToValidate)
+        public bool ValidateID(int idToValidate)
         {
             // Passes idToValidate to SQL Query to check against employee table
 

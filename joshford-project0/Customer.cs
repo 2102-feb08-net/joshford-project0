@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace joshford_project0
 {
@@ -13,9 +14,9 @@ namespace joshford_project0
         // Constructor for new customer with no store id or records
         public Customer(string custFirstName, string custLastName)
         {
-            _custFirstName = custFirstName;
-            _custLastName = custLastName;
-            _custID = this.CreateNewCustomer();
+            _custFirstName = FormatCustomerName(custFirstName);
+            _custLastName = FormatCustomerName(custLastName);
+            _custID = CreateNewCustomer();
         }
 
         // Constructor for returning customer with customer and store id
@@ -50,9 +51,41 @@ namespace joshford_project0
         /// </summary>
         public int PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
 
-        public void FormatCustomerName(string custFirstName, string custLastName)
+        /// <summary>
+        /// Correctly formats the given customer's first and last name
+        /// </summary>
+        /// <param name="custFirstName"></param>
+        /// <param name="custLastName"></param>
+        public static string FormatCustomerName(string custName)
         {
-            
+            string custNameFormat;
+            string firstLetter = null;
+            string otherLetters = null;
+            List<char> nameChars = new List<char>();
+            List<char> formattedChars = new List<char>();
+
+            foreach(int index in custName)
+            {
+                nameChars[index] = custName[index];
+                if(index == 0)
+                {
+                    firstLetter = nameChars[index].ToString().ToUpper();
+                }
+                else
+                {
+                    formattedChars[index] = nameChars[index];
+                }
+            }
+
+            foreach(int index in formattedChars)
+            {
+                otherLetters += formattedChars[index].ToString();
+            }
+
+            firstLetter += otherLetters;
+            custNameFormat = firstLetter;
+
+            return custNameFormat;
         }
 
         /// <summary>
@@ -60,10 +93,9 @@ namespace joshford_project0
         ///     customer table, then sets the local customerID from
         ///     the SQL customer table
         /// </summary>
-        public int CreateNewCustomer()
+        public static int CreateNewCustomer()
         {
             int newCustomerID = 0;
-
 
             return newCustomerID;
         }

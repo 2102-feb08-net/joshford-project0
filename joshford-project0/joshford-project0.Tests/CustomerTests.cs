@@ -18,9 +18,7 @@ namespace joshford_project0
             
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        [Fact]
         public void testTemplate()
         {
             // Arrange
@@ -34,9 +32,7 @@ namespace joshford_project0
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        [Fact]
         public void testTemplate1()
         {
             // Arrange
@@ -50,9 +46,7 @@ namespace joshford_project0
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        [Fact]
         public void testTemplate2()
         {
             // Arrange
@@ -66,9 +60,7 @@ namespace joshford_project0
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        [Fact]
         public void testTemplate3()
         {
             // Arrange
@@ -82,9 +74,7 @@ namespace joshford_project0
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        [Fact]
         public void testTemplate4()
         {
             // Arrange
@@ -98,9 +88,7 @@ namespace joshford_project0
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        [Fact]
         public void testTemplate5()
         {
             // Arrange
@@ -114,9 +102,7 @@ namespace joshford_project0
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        [Fact]
         public void testTemplate6()
         {
             // Arrange

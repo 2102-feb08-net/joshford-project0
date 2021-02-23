@@ -1,0 +1,110 @@
+CREATE SCHEMA RiseNGrind;
+GO
+
+CREATE TABLE Stores(
+    StoreID INT IDENTITY NOT NULL,
+    StoreLocation NVARCHAR(50) NOT NULL,
+    StoreManager INT NOT NULL
+CONSTRAINT Stores_PK PRIMARY KEY(StoreID)
+);
+
+CREATE TABLE Employees(
+    EmployeeID INT IDENTITY NOT NULL,
+    EmployeeFirstName NVARCHAR(50) NOT NULL,
+    EmployeeLastName NVARCHAR(50) NOT NULL,
+    StoreID INT NOT NULL,
+    Title NVARCHAR(20) NOT NULL
+CONSTRAINT Employees_PK PRIMARY KEY(EmployeeID)
+CONSTRAINT EmployeesToStores_FK FOREIGN KEY(StoreID)
+REFERENCES Stores(StoreID)
+);
+
+CREATE TABLE Products(
+    ProductID INT IDENTITY NOT NULL,
+    ProductName NVARCHAR(100) NOT NULL,
+    ProductPrice FLOAT NOT NULL
+CONSTRAINT Product_PK PRIMARY KEY(ProductID)
+);
+
+CREATE TABLE StoreInventory(
+    InventoryID INT IDENTITY NOT NULL,
+    ProductID INT NOT NULL,
+    ProductQuantity INT NOT NULL,
+    StoreID INT NOT NULL
+CONSTRAINT StoreInventory_PK PRIMARY KEY(InventoryID)
+CONSTRAINT StoresToProducts_FK FOREIGN KEY(ProductID)
+REFERENCES Products(ProductID),
+CONSTRAINT StoreToInventory_FK FOREIGN KEY(StoreID)
+REFERENCES Stores(StoreID)
+);
+
+CREATE TABLE Customers(
+    CustomerID INT IDENTITY NOT NULL,
+    CustomerFirstName NVARCHAR(50) NOT NULL CHECK(LEN(CustomerFirstName) > 1),
+    CustomerLastName NVARCHAR(50),
+    StoreID INT,
+    PhoneNumber INT CHECK(LEN(PhoneNumber) = 9)
+CONSTRAINT Customers_PK PRIMARY KEY(CustomerID)
+CONSTRAINT CustomersToStores_FK FOREIGN KEY(StoreID)
+REFERENCES Stores(StoreID)
+);
+
+CREATE TABLE Orders(
+    OrderID INT IDENTITY NOT NULL,
+    EmployeeID INT NOT NULL,
+    CustomerID INT NOT NULL,
+    StoreID INT NOT NULL,
+    OrderTotal FLOAT NOT NULL
+CONSTRAINT Order_PK PRIMARY KEY(OrderID)
+CONSTRAINT OrdersToStores_FK FOREIGN KEY(StoreID)
+REFERENCES Stores(StoreID),
+CONSTRAINT OrdersToCustomers_FK FOREIGN KEY(CustomerID)
+REFERENCES Customers(CustomerID),
+CONSTRAINT OrdersToEmployees_FK FOREIGN KEY(EmployeeID)
+REFERENCES Employees(EmployeeID)
+);
+
+CREATE TABLE OrderLine(
+    OrderLineID INT IDENTITY NOT NULL,
+    OrderID INT NOT NULL,
+    ProductID INT NOT NULL,
+    ProductQuantity INT NOT NULL CHECK(ProductQuantity < 10),
+    ProductPrice FLOAT NOT NULL CHECK(ProductPrice > 0)
+CONSTRAINT OrderLine_PK PRIMARY KEY(OrderLineID)
+CONSTRAINT OrdersToLine_FK FOREIGN KEY(OrderID)
+REFERENCES Orders(OrderID),
+CONSTRAINT OrdersToProducts_FK FOREIGN KEY(ProductID)
+REFERENCES Products(ProductID)
+);
+
+CREATE TABLE CustomerHistory(
+    PurchaseID INT IDENTITY NOT NULL,
+    CustomerID INT NOT NULL,
+    OrderID INT NOT NULL
+CONSTRAINT CustomerHistory_PK PRIMARY KEY(PurchaseID)
+CONSTRAINT CustomersHistory_FK FOREIGN KEY(CustomerID)
+REFERENCES Customers(CustomerID),
+CONSTRAINT CustomerHistoryToOrders_FK FOREIGN KEY(OrderID)
+REFERENCES Orders(OrderID)
+);
+
+CREATE TABLE EmployeeHistory(
+    SaleID INT IDENTITY NOT NULL,
+    EmployeeID INT NOT NULL,
+    OrderID INT NOT NULL
+CONSTRAINT EmployeeHistory_PK PRIMARY KEY(SaleID)
+CONSTRAINT EmployeesHistory_FK FOREIGN KEY(EmployeeID)
+REFERENCES Employees(EmployeeID),
+CONSTRAINT EmployeeHistoryToOrders_FK FOREIGN KEY(OrderID)
+REFERENCES Orders(OrderID)
+);
+
+DROP TABLE Orders;
+DROP TABLE OrderLine;
+DROP TABLE Products;
+DROP TABLE Customers;
+DROP TABLE Employees;
+DROP TABLE Stores;
+DROP TABLE StoreInventory;
+DROP TABLE CustomerHistory;
+DROP TABLE EmployeeHistory;

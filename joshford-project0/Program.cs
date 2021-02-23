@@ -17,7 +17,7 @@ namespace joshford_project0
             int storeID = 0;                // Stores the ID of the store the order was placed
 
             // User Interface Begins
-            Console.WriteLine("\tWelcome to Rise 'n Grind: Online!");
+            Console.WriteLine("\tWelcome to Rise 'N Grind Cafe!");
             Console.WriteLine("Are you a first time customer?");
 
             do
@@ -70,6 +70,8 @@ namespace joshford_project0
                 Customer nCustomer = new Customer(customerFirstName, customerLastName);
 
             }
+
+
             
         }
     }

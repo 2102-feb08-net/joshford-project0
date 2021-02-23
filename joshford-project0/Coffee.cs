@@ -38,42 +38,11 @@ namespace joshford_project0
         public double GetProductPrice(Enum productPrice)
         {
             CoffeeTypes coffeePrice = (CoffeeTypes) productPrice;
-            double priceOfCoffee;
+            double priceOfCoffee = 0;
 
-            switch (coffeePrice)
-            {
-                case CoffeeTypes.Regular:
-                    priceOfCoffee = 1.99;
-                    return priceOfCoffee;
+            // SQL Query for coffee prices
 
-                case CoffeeTypes.Decaf:
-                    priceOfCoffee = 1.49;
-                    return priceOfCoffee;
-
-                case CoffeeTypes.Iced_Regular:
-                    priceOfCoffee = 2.99;
-                    return priceOfCoffee;
-
-                case CoffeeTypes.Iced_Decaf:
-                    priceOfCoffee = 2.49;
-                    return priceOfCoffee;
-
-                case CoffeeTypes.Mocha_Latte:
-                    priceOfCoffee = 3.99;
-                    return priceOfCoffee;
-
-                case CoffeeTypes.Vanilla_Latte:
-                    priceOfCoffee = 3.99;
-                    return priceOfCoffee;
-
-                case CoffeeTypes.Cappucino:
-                    priceOfCoffee = 4.99;
-                    return priceOfCoffee;
-
-                default:
-                    priceOfCoffee = 0.00;
-                    return priceOfCoffee;
-            }
+            return priceOfCoffee;
         }
 
     }

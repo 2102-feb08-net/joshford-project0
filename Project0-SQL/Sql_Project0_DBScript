@@ -1,0 +1,206 @@
+CREATE SCHEMA RiseNGrind;
+GO
+
+/****************************************
+*       Create Database Tables          *
+*****************************************/
+
+CREATE TABLE Stores(
+    StoreID INT IDENTITY NOT NULL,
+    StoreLocation NVARCHAR(50) NOT NULL,
+    StoreManager INT
+CONSTRAINT Stores_PK PRIMARY KEY(StoreID)
+);
+
+CREATE TABLE Employees(
+    EmployeeID INT IDENTITY NOT NULL,
+    EmployeeFirstName NVARCHAR(50) NOT NULL,
+    EmployeeLastName NVARCHAR(50) NOT NULL,
+    StoreID INT NOT NULL,
+    Title NVARCHAR(20) NOT NULL
+CONSTRAINT Employees_PK PRIMARY KEY(EmployeeID)
+CONSTRAINT EmployeesToStores_FK FOREIGN KEY(StoreID)
+REFERENCES Stores(StoreID)
+);
+
+CREATE TABLE Products(
+    ProductID INT IDENTITY NOT NULL,
+    ProductName NVARCHAR(100) NOT NULL,
+    ProductPrice FLOAT NOT NULL
+CONSTRAINT Product_PK PRIMARY KEY(ProductID)
+);
+
+CREATE TABLE StoreInventory(
+    InventoryID INT IDENTITY NOT NULL,
+    ProductID INT NOT NULL,
+    ProductQuantity INT NOT NULL,
+    StoreID INT NOT NULL
+CONSTRAINT StoreInventory_PK PRIMARY KEY(InventoryID)
+CONSTRAINT StoresToProducts_FK FOREIGN KEY(ProductID)
+REFERENCES Products(ProductID),
+CONSTRAINT StoreToInventory_FK FOREIGN KEY(StoreID)
+REFERENCES Stores(StoreID)
+);
+
+CREATE TABLE Customers(
+    CustomerID INT IDENTITY NOT NULL,
+    CustomerFirstName NVARCHAR(50) NOT NULL CHECK(LEN(CustomerFirstName) > 1),
+    CustomerLastName NVARCHAR(50),
+    StoreID INT,
+    PhoneNumber INT CHECK(LEN(PhoneNumber) = 9)
+CONSTRAINT Customers_PK PRIMARY KEY(CustomerID)
+CONSTRAINT CustomersToStores_FK FOREIGN KEY(StoreID)
+REFERENCES Stores(StoreID)
+);
+
+CREATE TABLE Orders(
+    OrderID INT IDENTITY NOT NULL,
+    EmployeeID INT NOT NULL,
+    CustomerID INT NOT NULL,
+    StoreID INT NOT NULL,
+    OrderTotal FLOAT NOT NULL
+CONSTRAINT Order_PK PRIMARY KEY(OrderID)
+CONSTRAINT OrdersToStores_FK FOREIGN KEY(StoreID)
+REFERENCES Stores(StoreID),
+CONSTRAINT OrdersToCustomers_FK FOREIGN KEY(CustomerID)
+REFERENCES Customers(CustomerID),
+CONSTRAINT OrdersToEmployees_FK FOREIGN KEY(EmployeeID)
+REFERENCES Employees(EmployeeID)
+);
+
+CREATE TABLE OrderLine(
+    OrderLineID INT IDENTITY NOT NULL,
+    OrderID INT NOT NULL,
+    ProductID INT NOT NULL,
+    ProductQuantity INT NOT NULL CHECK(ProductQuantity < 10),
+    ProductPrice FLOAT NOT NULL CHECK(ProductPrice > 0)
+CONSTRAINT OrderLine_PK PRIMARY KEY(OrderLineID)
+CONSTRAINT OrdersToLine_FK FOREIGN KEY(OrderID)
+REFERENCES Orders(OrderID),
+CONSTRAINT OrdersToProducts_FK FOREIGN KEY(ProductID)
+REFERENCES Products(ProductID)
+);
+
+CREATE TABLE CustomerHistory(
+    PurchaseID INT IDENTITY NOT NULL,
+    CustomerID INT NOT NULL,
+    OrderID INT NOT NULL
+CONSTRAINT CustomerHistory_PK PRIMARY KEY(PurchaseID)
+CONSTRAINT CustomersHistory_FK FOREIGN KEY(CustomerID)
+REFERENCES Customers(CustomerID),
+CONSTRAINT CustomerHistoryToOrders_FK FOREIGN KEY(OrderID)
+REFERENCES Orders(OrderID)
+);
+
+CREATE TABLE EmployeeHistory(
+    SaleID INT IDENTITY NOT NULL,
+    EmployeeID INT NOT NULL,
+    OrderID INT NOT NULL
+CONSTRAINT EmployeeHistory_PK PRIMARY KEY(SaleID)
+CONSTRAINT EmployeesHistory_FK FOREIGN KEY(EmployeeID)
+REFERENCES Employees(EmployeeID),
+CONSTRAINT EmployeeHistoryToOrders_FK FOREIGN KEY(OrderID)
+REFERENCES Orders(OrderID)
+);
+
+/****************************************
+*       Populate Database Tables        *
+*****************************************/
+
+INSERT INTO Stores VALUES ('Catonsville', NULL);
+INSERT INTO Stores VALUES ('Baltimore', NULL);
+INSERT INTO Stores VALUES ('Towson', NULL);
+
+INSERT INTO Employees VALUES ('Josh', 'Ford', 1, 'Manager');
+INSERT INTO Employees VALUES ('Bill', 'Dollar', 2, 'Manager');
+INSERT INTO Employees VALUES ('Ralph', 'Wreck', 3, 'Manager');
+INSERT INTO Employees VALUES ('Jane', 'Doe', 1, 'Sales Associate');
+INSERT INTO Employees VALUES ('John', 'Doe', 1, 'Sales Associate');
+INSERT INTO Employees VALUES ('Wesley', 'Snips', 2, 'Sales Associate');
+INSERT INTO Employees VALUES ('Tom', 'Hanks', 2, 'Sales Associate');
+INSERT INTO Employees VALUES ('Santa', 'Claus', 3, 'Sales Associate');
+INSERT INTO Employees VALUES ('Rudolph', 'Rein', 3, 'Sales Associate');
+
+INSERT INTO Products VALUES ('Regular', 1.99);
+INSERT INTO Products VALUES ('Decaf', 1.49);
+INSERT INTO Products VALUES ('Iced Regular', 2.99);
+INSERT INTO Products VALUES ('Iced Decaf', 2.49);
+INSERT INTO Products VALUES ('Mocha Latte', 3.99);
+INSERT INTO Products VALUES ('Vanilla Latte', 3.99);
+INSERT INTO Products VALUES ('Cappucino', 4.99);
+INSERT INTO Products VALUES ('Bagel', 2.99);
+INSERT INTO Products VALUES ('Bagel with Spread', 3.49);
+INSERT INTO Products VALUES ('Muffin', 3.49);
+INSERT INTO Products VALUES ('Muffin with Spread', 3.99);
+INSERT INTO Products VALUES ('Cheese Pastry', 1.99);
+INSERT INTO Products VALUES ('Apple Pastry', 1.99);
+INSERT INTO Products VALUES ('Strawberry Pastry', 1.99);
+INSERT INTO Products VALUES ('Breakfast Bagel', 4.49);
+INSERT INTO Products VALUES ('Hashbrowns', 0.99);
+
+INSERT INTO StoreInventory VALUES ( 1, 100, 1);
+INSERT INTO StoreInventory VALUES ( 2, 100, 1);
+INSERT INTO StoreInventory VALUES ( 3, 100, 1);
+INSERT INTO StoreInventory VALUES ( 4, 100, 1);
+INSERT INTO StoreInventory VALUES ( 5, 100, 1);
+INSERT INTO StoreInventory VALUES ( 6, 100, 1);
+INSERT INTO StoreInventory VALUES ( 7, 100, 1);
+INSERT INTO StoreInventory VALUES ( 8, 100, 1);
+INSERT INTO StoreInventory VALUES ( 9, 100, 1);
+INSERT INTO StoreInventory VALUES ( 10, 100, 1);
+INSERT INTO StoreInventory VALUES ( 11, 100, 1);
+INSERT INTO StoreInventory VALUES ( 12, 100, 1);
+INSERT INTO StoreInventory VALUES ( 13, 100, 1);
+INSERT INTO StoreInventory VALUES ( 14, 100, 1);
+INSERT INTO StoreInventory VALUES ( 15, 100, 1);
+INSERT INTO StoreInventory VALUES ( 16, 100, 1);
+
+INSERT INTO StoreInventory VALUES ( 1, 50, 2);
+INSERT INTO StoreInventory VALUES ( 2, 50, 2);
+INSERT INTO StoreInventory VALUES ( 3, 50, 2);
+INSERT INTO StoreInventory VALUES ( 4, 50, 2);
+INSERT INTO StoreInventory VALUES ( 5, 50, 2);
+INSERT INTO StoreInventory VALUES ( 6, 50, 2);
+INSERT INTO StoreInventory VALUES ( 7, 50, 2);
+INSERT INTO StoreInventory VALUES ( 8, 50, 2);
+INSERT INTO StoreInventory VALUES ( 9, 50, 2);
+INSERT INTO StoreInventory VALUES ( 10, 50, 2);
+INSERT INTO StoreInventory VALUES ( 11, 50, 2);
+INSERT INTO StoreInventory VALUES ( 12, 50, 2);
+INSERT INTO StoreInventory VALUES ( 13, 50, 2);
+INSERT INTO StoreInventory VALUES ( 14, 50, 2);
+INSERT INTO StoreInventory VALUES ( 15, 50, 2);
+INSERT INTO StoreInventory VALUES ( 16, 50, 2);
+
+INSERT INTO StoreInventory VALUES ( 1, 50, 3);
+INSERT INTO StoreInventory VALUES ( 2, 50, 3);
+INSERT INTO StoreInventory VALUES ( 3, 50, 3);
+INSERT INTO StoreInventory VALUES ( 4, 50, 3);
+INSERT INTO StoreInventory VALUES ( 5, 50, 3);
+INSERT INTO StoreInventory VALUES ( 6, 50, 3);
+INSERT INTO StoreInventory VALUES ( 7, 50, 3);
+INSERT INTO StoreInventory VALUES ( 8, 50, 3);
+INSERT INTO StoreInventory VALUES ( 9, 50, 3);
+INSERT INTO StoreInventory VALUES ( 10, 50, 3);
+INSERT INTO StoreInventory VALUES ( 11, 50, 3);
+INSERT INTO StoreInventory VALUES ( 12, 50, 3);
+INSERT INTO StoreInventory VALUES ( 13, 50, 3);
+INSERT INTO StoreInventory VALUES ( 14, 50, 3);
+INSERT INTO StoreInventory VALUES ( 15, 50, 3);
+INSERT INTO StoreInventory VALUES ( 16, 50, 3);
+
+/****************************************
+*       Drop Database Tables            *
+*       Only if needed                  *
+*****************************************/
+/*
+DROP TABLE EmployeeHistory;
+DROP TABLE CustomerHistory;
+DROP TABLE OrderLine;
+DROP TABLE Orders;
+DROP TABLE StoreInventory;
+DROP TABLE Customers;
+DROP TABLE Products;
+DROP TABLE Employees;
+DROP TABLE Stores;
+*/

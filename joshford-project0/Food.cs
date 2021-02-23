@@ -38,50 +38,11 @@ namespace joshford_project0
         public double GetProductPrice(Enum productToPrice)
         {
             FoodTypes foodPrice = (FoodTypes) productToPrice;
-            double priceOfFood;
+            double priceOfFood = 0;
 
-            switch(foodPrice)
-            {
-                case FoodTypes.Bagel:
-                    priceOfFood = 2.99;
-                    return priceOfFood;
+            // SQL Query for food Prices
 
-                case FoodTypes.Bagel_With_Spread:
-                    priceOfFood = 3.49;
-                    return priceOfFood;
-
-                case FoodTypes.Muffin:
-                    priceOfFood = 3.49;
-                    return priceOfFood;
-
-                case FoodTypes.Muffin_With_Spread:
-                    priceOfFood = 3.99;
-                    return priceOfFood;
-
-                case FoodTypes.Cheese_Pastry:
-                    priceOfFood = 1.99;
-                    return priceOfFood;
-
-                case FoodTypes.Apple_Pastry:
-                    priceOfFood = 1.99;
-                    return priceOfFood;
-
-                case FoodTypes.Strawberry_Pastry:
-                    priceOfFood = 1.99;
-                    return priceOfFood;
-
-                case FoodTypes.Breakfast_Bagel:
-                    priceOfFood = 4.49;
-                    return priceOfFood;
-
-                case FoodTypes.Hashbrowns:
-                    priceOfFood = 0.99;
-                    return priceOfFood;
-
-                default:
-                    priceOfFood = 0.00;
-                    return priceOfFood;
-            }
+            return priceOfFood;
         }
     }
 

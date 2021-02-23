@@ -1,1 +1,0 @@
-Server=tcp:josh-ford-rev-training.database.windows.net,1433;Initial Catalog=joshford-project0;PersistSecurityInfo=False;User ID=jeford23;Password=Revature-Training;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;

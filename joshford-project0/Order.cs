@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using joshford_project0.Library;
 
 namespace joshford_project0
 {
@@ -93,7 +95,10 @@ namespace joshford_project0
         /// </summary>
         public void PlaceOrder()
         {
-            // SQL code to finalize order placement
+            DataAccess_Library dataAccess = new DataAccess_Library();
+            var context = new joshfordproject0Context();
+
+            context = DataAccess_Library.OpenDatabaseConnection();
         }
     }
 }

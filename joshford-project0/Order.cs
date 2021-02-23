@@ -13,12 +13,14 @@ namespace joshford_project0
         private int _customerID;
         private int _employeeID;
         private int _storeID;
+        private DateTime currentDate;
 
         public Order(int custID, int emplID, int storeID)
         {
             _customerID = custID;
             _employeeID = emplID;
             _storeID = storeID;
+            currentDate = currentDate.ToLocalTime();
         }
 
         /// <summary>
@@ -99,6 +101,9 @@ namespace joshford_project0
             var context = new joshfordproject0Context();
 
             context = DataAccess_Library.OpenDatabaseConnection();
+
+            context.Orders
+                .
         }
     }
 }

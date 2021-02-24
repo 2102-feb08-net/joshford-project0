@@ -21,16 +21,20 @@ namespace joshford_project0
         }
 
         [Fact]
-        public void testTemplate()
+        public void Order_AddCoffeeToOrder_OrderHasCoffee()
         {
             // Arrange
-
+            OrderC expected = new OrderC(1, 1, 1);
+            CoffeeTypes coffeeProduct = CoffeeTypes.Regular;
+            int coffeeQuantity = 1;
+            expected.AddCoffeeToOrder(coffeeProduct, coffeeQuantity);
 
             // Act
-
+            OrderC actual = new OrderC(1, 1, 1);
+            actual.AddCoffeeToOrder(CoffeeTypes.Regular, 1);
 
             // Assert
-
+            Assert.Equal(expected, actual);
 
         }
 

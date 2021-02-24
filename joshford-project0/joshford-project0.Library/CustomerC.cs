@@ -50,6 +50,7 @@ namespace joshford_project0
         /// </summary>
         public int PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
 
+        /*
         public static int CreateCustomerID()
         {
             int customerID = 1;
@@ -63,10 +64,9 @@ namespace joshford_project0
 
             return customerID;
         }
-
-        /* 
-         *  Method does not work at this time
-         * 
+        */
+        /*
+        Method does not work at this time
         /// <summary>
         /// Correctly formats the given customer's first and last name
         /// </summary>
@@ -112,20 +112,19 @@ namespace joshford_project0
         /// </summary>
         public int AddNewCustomer(string custFirstName, string custLastName)
         {
-            _custID = CreateCustomerID();
+            
 
             using var context = new joshfordproject0Context(s_dbContextOptions);
             var customer = new Customer
             {
-                CustomerId = _custID,
-                CustomerFirstName = _custFirstName,
-                CustomerLastName = _custLastName,
+                CustomerFirstName = custFirstName,
+                CustomerLastName = custLastName,
                 StoreId = _storeID
             };
 
             context.Customers.Add(customer);
 
-            // context.SaveChanges();
+            context.SaveChanges();
 
             return _custID;
         }

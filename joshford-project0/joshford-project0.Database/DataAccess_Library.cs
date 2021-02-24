@@ -16,7 +16,7 @@ namespace joshford_project0.Database
             string connectionString = File.ReadAllText("/Users/Josh/Revature/ConnectionString.txt");
             DbContextOptions<joshfordproject0Context> contextOptions = new DbContextOptionsBuilder<joshfordproject0Context>()
                 .UseSqlServer(connectionString)
-                .Options; ;
+                .Options;
             return contextOptions;
 
             /*

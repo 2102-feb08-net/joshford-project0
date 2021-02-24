@@ -8,12 +8,12 @@ namespace joshford_project0
 {
     public class CustomerC
     {
-        private int _custID = 0;
+        private int _custID;
         private int _storeID = 1;       // 1 is the main store location
         private string _custFirstName;
         private string _custLastName;
         private int _phoneNumber;
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = DataAccess_Library.OpenDatabaseConnection();
 
         // Constructor for new customer with no store id or records
         public CustomerC() { }
@@ -52,11 +52,14 @@ namespace joshford_project0
 
         public static int CreateCustomerID()
         {
-            int customerID;
+            int customerID = 1;
             using var context = new joshfordproject0Context(s_dbContextOptions);
 
-            customerID = context.Customers.Select(x => x.CustomerId).Count();    
-            customerID++;
+            //customerID = context.Customers.Select(x => x.CustomerId).Count();
+            if(customerID != 0)
+            {
+                customerID++;
+            }
 
             return customerID;
         }
@@ -122,7 +125,7 @@ namespace joshford_project0
 
             context.Customers.Add(customer);
 
-            context.SaveChanges();
+            // context.SaveChanges();
 
             return _custID;
         }

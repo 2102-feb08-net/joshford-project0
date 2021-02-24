@@ -14,8 +14,9 @@ namespace joshford_project0
         private int _customerID;
         private int _employeeID;
         private int _storeID;
+        private int productAmount = 16;
         private DateTime currentDate;
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = DataAccess_Library.OpenDatabaseConnection();
 
 
         public OrderC(int custID, int emplID, int storeID)
@@ -98,13 +99,12 @@ namespace joshford_project0
             using var context = new joshfordproject0Context(s_dbContextOptions);
 
             IQueryable<Product> menu = context.Products
-                .Include(x => x.ProductName)
-                .Include(x => x.ProductPrice)
-                .OrderBy(x => x.ProductName);
+                .OrderBy(x => x.ProductName)
+                .Take(16);
 
-            foreach (Product product in menu)
+            foreach (Product products in menu)
             {
-                Console.WriteLine($"{product.ProductName}: $ {product.ProductPrice}");
+                Console.WriteLine($"{products.ProductName}: $ {products.ProductPrice}");
             }
         }
 

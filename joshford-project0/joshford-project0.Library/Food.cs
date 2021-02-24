@@ -9,7 +9,7 @@ namespace joshford_project0
     public class Food : IProduct
     {
         private List<FoodTypes> currentOrder = new List<FoodTypes>();
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = DataAccess_Library.OpenDatabaseConnection();
 
         /// <summary>
         /// Constructor to create a food product object, uses product interface

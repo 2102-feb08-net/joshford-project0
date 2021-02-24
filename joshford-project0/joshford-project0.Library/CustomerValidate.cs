@@ -10,7 +10,7 @@ namespace joshford_project0
     {
 
         bool idIsValid = false;
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = DataAccess_Library.OpenDatabaseConnection();
 
         /// <summary>
         /// Customer Validation constructor

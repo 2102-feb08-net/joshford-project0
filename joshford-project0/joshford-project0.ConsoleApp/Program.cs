@@ -8,15 +8,9 @@ namespace joshford_project0
 {
     class Program
     {
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = DataAccess_Library.OpenDatabaseConnection();
 
         public static void Main(string[] args)
-        {
-            DataAccess_Library.OpenDatabaseConnection();
-            DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
-            RunUI(s_dbContextOptions);
-        }
-
-        public static void RunUI(DbContextOptions<joshfordproject0Context> s_dbContextOptions)
         {
             // Let do this thing
             bool validID = false;           
@@ -106,15 +100,17 @@ namespace joshford_project0
 
                 CustomerC customerToAdd = new CustomerC();
                 customerToAdd.AddNewCustomer(customerFirstName, customerLastName);
+                /*
                 if (customerToValidate.ValidateID(customerToAdd.CustID))
                 {
                     validID = true;
                 }
                 else
                 {
-                    Console.WriteLine("--Customer Creatoin Error");
+                    Console.WriteLine("--Customer Creation Error");
                     validID = false;
                 }
+                */
                 
             }
 
@@ -129,12 +125,12 @@ namespace joshford_project0
                 {
                     // Customer UI Initiation
                     OrderC order = new OrderC(customerID, employeeID, storeID);
-                    Console.WriteLine("*******************");
-                    Console.WriteLine("*   Order Menu    *");
-                    Console.WriteLine("*******************");
+                    Console.WriteLine("\t*******************");
+                    Console.WriteLine("\t*   Order Menu    *");
+                    Console.WriteLine("\t*******************");
                     Console.WriteLine("\t*A: Add Item to Order\n\t*E: Exit");
                     menuSelection = Console.ReadLine().ToUpper();
-                    while (menuSelection != "C" && menuSelection != "F" && menuSelection != "E")
+                    while (menuSelection != "A" && menuSelection != "E")
                     {
                         Console.WriteLine("\tInvalid Menu Selection.");
                         Console.WriteLine("\tPlease choose from the following:");
@@ -153,7 +149,7 @@ namespace joshford_project0
                     // Validation should prevent
                     else
                     {
-                        Console.WriteLine("How we get here bruh");
+                        Console.WriteLine("Applcation Closed due to validation error.");
                     }
 
                     order.PrintCurrentOrder();

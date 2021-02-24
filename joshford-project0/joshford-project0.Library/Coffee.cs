@@ -10,7 +10,7 @@ namespace joshford_project0
     {
         private int _prodID = 0;
         private Dictionary<int, CoffeeTypes> currentOrder = new Dictionary<int, CoffeeTypes>();
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = DataAccess_Library.OpenDatabaseConnection();
 
         /// <summary>
         /// Constructor to create a coffee product object, uses product interface

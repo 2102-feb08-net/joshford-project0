@@ -13,7 +13,7 @@ namespace joshford_project0
         private double _totalSalesAmount = 0.00;
         private int _totalSales = 0;
         private Dictionary<DateTime, double> _emplSales = new Dictionary<DateTime, double>();
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = DataAccess_Library.OpenDatabaseConnection();
 
         public EmployeeC(int emplID, int storeID)
         {

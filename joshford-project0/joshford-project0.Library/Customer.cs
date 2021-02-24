@@ -14,18 +14,12 @@ namespace joshford_project0
         private int _phoneNumber;
 
         // Constructor for new customer with no store id or records
-        public Customer(string custFirstName, string custLastName)
-        {
-            _custFirstName = FormatCustomerName(custFirstName);
-            _custLastName = FormatCustomerName(custLastName);
-            _custID = CreateCustomerID();
-        }
+        public Customer() { }
 
         // Constructor for returning customer with customer and store id
-        public Customer(int custID, int storeID)
+        public Customer(int custID)
         {
             _custID = custID;
-            _storeID = storeID;
         }
 
         /// <summary>
@@ -108,13 +102,20 @@ namespace joshford_project0
         ///     customer table, then sets the local customerID from
         ///     the SQL customer table
         /// </summary>
-        private void AddNewCustomer(Customer customerToAdd)
+        public int AddNewCustomer(string custFirstName, string custLastName)
         {
+            _custFirstName = FormatCustomerName(custFirstName);
+            _custLastName = FormatCustomerName(custLastName);
+            _custID = CreateCustomerID();
+
             var context = new joshfordproject0Context();
+            Customer customer = new Customer(_custID);
 
             context = DataAccess_Library.OpenDatabaseConnection();
 
-            context.Customers.Add(customerToAdd);
+            context.Add(customer);
+
+            return _custID;
         }
     }
 }

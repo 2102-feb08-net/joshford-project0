@@ -77,10 +77,15 @@ namespace joshford_project0
                 customerFirstName = Console.ReadLine();
                 Console.WriteLine("Please enter your last name: ");
                 customerLastName = Console.ReadLine();
+                Customer customerToAdd = new Customer();
+
+                customerToAdd.AddNewCustomer(customerFirstName, customerLastName);
 
                 validID = true;
             }
 
+            // Create Customer Object
+            Customer customer = new Customer(customerID);
 
             if (validID)
             {

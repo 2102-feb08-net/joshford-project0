@@ -34,7 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\joshford-project0.Library\joshford-project0.Library.csproj" />
-    <ProjectReference Include="..\joshford-project0.csproj" />
+    <ProjectReference Include="..\joshford-project0.ConsoleApp\joshford-project0.ConsoleApp.csproj" />
   </ItemGroup>
 </Project>

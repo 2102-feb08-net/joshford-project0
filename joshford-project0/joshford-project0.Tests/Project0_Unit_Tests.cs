@@ -9,7 +9,7 @@ namespace joshford_project0
         public void Employee_IDValidationTest_EmployeeIDValid()
         {
             // Arrange
-            Employee employee = new Employee(1, 1);
+            EmployeeC employee = new EmployeeC(1, 1);
             EmployeeValidate validation = new EmployeeValidate();
 
             // Act

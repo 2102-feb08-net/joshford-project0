@@ -2,12 +2,14 @@
 using System.Linq;
 using System.Collections.Generic;
 using joshford_project0.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace joshford_project0
 {
     public class Food : IProduct
     {
         private List<FoodTypes> currentOrder = new List<FoodTypes>();
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
 
         /// <summary>
         /// Constructor to create a food product object, uses product interface
@@ -29,10 +31,7 @@ namespace joshford_project0
         /// <param name="productToCheck"></param>
         public void CheckProductInventory(Enum productToCheck)
         {
-            DataAccess_Library dataAccess = new DataAccess_Library();
-            var context = new joshfordproject0Context();
-
-            context = DataAccess_Library.OpenDatabaseConnection();
+            using var context = new joshfordproject0Context(s_dbContextOptions);
 
             FoodTypes foodInvCheck = (FoodTypes)productToCheck;
             int productAmount = 0;
@@ -45,9 +44,7 @@ namespace joshford_project0
 
         public double GetProductPrice(Enum productToPrice)
         {
-            var context = new joshfordproject0Context();
-
-            context = DataAccess_Library.OpenDatabaseConnection();
+            using var context = new joshfordproject0Context(s_dbContextOptions);
 
             FoodTypes foodPrice = (FoodTypes) productToPrice;
             double priceOfFood = 0;

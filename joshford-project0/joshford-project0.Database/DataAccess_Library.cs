@@ -13,7 +13,7 @@ namespace joshford_project0.Database
         /// <returns></returns>
         public static joshfordproject0Context OpenDatabaseConnection()
         {
-            string connectionString = File.ReadAllText("~/Revature/ConnectionString.txt");
+            string connectionString = File.ReadAllText("/Users/Josh/Revature/ConnectionString.txt");
             DbContextOptions<joshfordproject0Context> options = new DbContextOptionsBuilder<joshfordproject0Context>()
                 .UseSqlServer(connectionString)
                 .Options;

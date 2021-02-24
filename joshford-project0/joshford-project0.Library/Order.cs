@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using joshford_project0.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace joshford_project0
 {
@@ -14,6 +15,8 @@ namespace joshford_project0
         private int _employeeID;
         private int _storeID;
         private DateTime currentDate;
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
+
 
         public Order(int custID, int emplID, int storeID)
         {
@@ -26,10 +29,7 @@ namespace joshford_project0
         /// <summary>
         /// Retrieve the total order price of the given customers order
         /// </summary>
-        public double GetTotalOrderPrice()
-        {
-            return _currentOrderTotal;
-        }
+        public double TotalOrderPrice { get; }
 
         /// <summary>
         /// Add to the total order price of the given customers order
@@ -86,7 +86,7 @@ namespace joshford_project0
                 Console.WriteLine($"\t{customerFood[index]}\t");
             }
 
-            Console.WriteLine($"Current Order Total:\t{this.GetTotalOrderPrice()}");
+            Console.WriteLine($"Current Order Total:\t{this.TotalOrderPrice}");
 
         }
 
@@ -97,9 +97,9 @@ namespace joshford_project0
         /// </summary>
         public void PlaceOrder()
         {
-            var context = new joshfordproject0Context();
+            using var context = new joshfordproject0Context(s_dbContextOptions);
 
-            context = DataAccess_Library.OpenDatabaseConnection();
+            
 
             //context.Orders;
         }

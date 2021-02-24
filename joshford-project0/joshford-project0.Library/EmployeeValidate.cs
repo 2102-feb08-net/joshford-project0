@@ -2,12 +2,14 @@
 using System.Linq;
 using System.Collections.Generic;
 using joshford_project0.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace joshford_project0
 {
     public class EmployeeValidate
     {
         bool idIsValid = false;
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
 
         /// <summary>
         /// Employee Validation constructor
@@ -22,9 +24,7 @@ namespace joshford_project0
         /// <returns> boolean idIsValid </returns>
         public bool ValidateID(int idToValidate)
         {
-            var context = new joshfordproject0Context();
-
-            context = DataAccess_Library.OpenDatabaseConnection();
+            using var context = new joshfordproject0Context(s_dbContextOptions);
 
             if (idToValidate.Equals(context.Employees
                 .Select(x => x.EmployeeId)

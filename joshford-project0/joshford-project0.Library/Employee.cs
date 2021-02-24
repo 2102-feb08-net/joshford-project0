@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using joshford_project0.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace joshford_project0
 {
@@ -12,6 +13,7 @@ namespace joshford_project0
         private double _totalSalesAmount = 0.00;
         private int _totalSales = 0;
         private Dictionary<DateTime, double> _emplSales = new Dictionary<DateTime, double>();
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
 
         public Employee(int emplID, int storeID)
         {

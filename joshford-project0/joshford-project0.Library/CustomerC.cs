@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using joshford_project0.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace joshford_project0
 {
@@ -12,6 +13,7 @@ namespace joshford_project0
         private string _custFirstName;
         private string _custLastName;
         private int _phoneNumber;
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
 
         // Constructor for new customer with no store id or records
         public Customer() { }
@@ -20,6 +22,7 @@ namespace joshford_project0
         public Customer(int custID)
         {
             _custID = custID;
+
         }
 
         /// <summary>
@@ -50,16 +53,17 @@ namespace joshford_project0
         public static int CreateCustomerID()
         {
             int customerID;
-            var context = new joshfordproject0Context();
+            using var context = new joshfordproject0Context(s_dbContextOptions);
 
-            context = DataAccess_Library.OpenDatabaseConnection();
-
-            customerID = context.Customers.Select(x => x.CustomerId).Last();
+            customerID = context.Customers.Select(x => x.CustomerId).Count();    
             customerID++;
 
             return customerID;
         }
 
+        /* 
+         *  Method does not work at this time
+         * 
         /// <summary>
         /// Correctly formats the given customer's first and last name
         /// </summary>
@@ -73,16 +77,16 @@ namespace joshford_project0
             List<char> nameChars = new List<char>();
             List<char> formattedChars = new List<char>();
 
-            foreach(int index in custName)
+            for (int i = 0; i < custName.Length; i++)
             {
-                nameChars[index] = custName[index];
-                if(index == 0)
+                nameChars[i] = custName[i];
+                if(i == 0)
                 {
-                    firstLetter = nameChars[index].ToString().ToUpper();
+                    firstLetter = nameChars[i].ToString().ToUpper();
                 }
                 else
                 {
-                    formattedChars[index] = nameChars[index];
+                    formattedChars[i] = nameChars[i];
                 }
             }
 
@@ -96,6 +100,7 @@ namespace joshford_project0
 
             return custNameFormat;
         }
+        */
 
         /// <summary>
         /// Creates a new customer and adds the customer to the SQL database
@@ -104,16 +109,15 @@ namespace joshford_project0
         /// </summary>
         public int AddNewCustomer(string custFirstName, string custLastName)
         {
-            _custFirstName = FormatCustomerName(custFirstName);
-            _custLastName = FormatCustomerName(custLastName);
             _custID = CreateCustomerID();
 
-            var context = new joshfordproject0Context();
+            using var context = new joshfordproject0Context(s_dbContextOptions);
             Customer customer = new Customer(_custID);
+            customer.CustFirstName = custFirstName;
+            customer.CustLastName = custLastName;
 
-            context = DataAccess_Library.OpenDatabaseConnection();
-
-            context.Add(customer);
+            context.Customers.Add(customer);
+            context.SaveChanges();
 
             return _custID;
         }

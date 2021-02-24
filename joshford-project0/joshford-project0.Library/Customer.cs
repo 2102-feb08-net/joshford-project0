@@ -18,7 +18,8 @@ namespace joshford_project0
         {
             _custFirstName = FormatCustomerName(custFirstName);
             _custLastName = FormatCustomerName(custLastName);
-            _custID = CreateNewCustomer();
+            _custID = CreateCustomerID();
+            AddNewCustomer();
         }
 
         // Constructor for returning customer with customer and store id
@@ -52,6 +53,19 @@ namespace joshford_project0
         /// Get and set customer phone number(not required)
         /// </summary>
         public int PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
+
+        public static int CreateCustomerID()
+        {
+            int customerID;
+            var context = new joshfordproject0Context();
+
+            context = DataAccess_Library.OpenDatabaseConnection();
+
+            customerID = context.Customers.Select(x => x.CustomerId).Last();
+            customerID++;
+
+            return customerID;
+        }
 
         /// <summary>
         /// Correctly formats the given customer's first and last name
@@ -95,16 +109,13 @@ namespace joshford_project0
         ///     customer table, then sets the local customerID from
         ///     the SQL customer table
         /// </summary>
-        public static int CreateNewCustomer()
+        private void AddNewCustomer()
         {
-            DataAccess_Library dataAccess = new DataAccess_Library();
             var context = new joshfordproject0Context();
 
             context = DataAccess_Library.OpenDatabaseConnection();
 
-            int newCustomerID = 0;
-
-            return newCustomerID;
+            context.Customers.Add();
         }
     }
 }

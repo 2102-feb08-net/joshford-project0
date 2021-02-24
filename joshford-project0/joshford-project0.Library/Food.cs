@@ -45,7 +45,6 @@ namespace joshford_project0
 
         public double GetProductPrice(Enum productToPrice)
         {
-            DataAccess_Library dataAccess = new DataAccess_Library();
             var context = new joshfordproject0Context();
 
             context = DataAccess_Library.OpenDatabaseConnection();

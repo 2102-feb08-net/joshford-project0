@@ -97,13 +97,11 @@ namespace joshford_project0
         /// </summary>
         public void PlaceOrder()
         {
-            DataAccess_Library dataAccess = new DataAccess_Library();
             var context = new joshfordproject0Context();
 
             context = DataAccess_Library.OpenDatabaseConnection();
 
-            context.Orders
-                .
+            //context.Orders;
         }
     }
 }

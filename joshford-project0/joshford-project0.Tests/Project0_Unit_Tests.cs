@@ -6,16 +6,18 @@ namespace joshford_project0
     public class Project0_Unit_Tests
     {
         [Fact]
-        public void Customer_ConstructorTest_CustomerCreated()
+        public void Employee_IDValidationTest_EmployeeIDValid()
         {
             // Arrange
-            
+            Employee employee = new Employee(1, 1);
+            EmployeeValidate validation = new EmployeeValidate();
 
             // Act
-            
+            int employeeActualID = 1;
+            EmployeeValidate validationActualID = new EmployeeValidate();
 
             // Assert
-            
+            Assert.Equal(validation.ValidateID(employee.EmployeeID), validationActualID.ValidateID(employeeActualID));
         }
 
         [Fact]

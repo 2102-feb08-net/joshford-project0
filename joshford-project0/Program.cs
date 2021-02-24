@@ -9,15 +9,15 @@ namespace joshford_project0
     {
         public static void Main(string[] args)
         {
-            
-            bool validID = false;           // ID Validation boolean
-            bool validResponse = false;     // User input validation boolean
-            string newOrReturn;           // User input for new or returning customer
-            string customerFirstName;       // Stores first name of new customer
-            string customerLastName;        // Stores last name of new customer     
-            int customerID = 0;             // Stores the ID of customer
-            int employeeID = 0;             // Stores the ID of employee, for order information
-            int storeID = 0;                // Stores the ID of the store the order was placed
+            // Let do this thing
+            bool validID = false;           
+            bool validResponse = false;     
+            string newOrReturn;             
+            string customerFirstName;       
+            string customerLastName;             
+            int customerID = 0;             
+            int employeeID = 0;             
+            int storeID = 0;                
 
             // Database Connection is established
             DataAccess_Library dataAccess = new DataAccess_Library();
@@ -52,19 +52,21 @@ namespace joshford_project0
             {
                 Console.WriteLine("Please enter customer ID: ");
                 customerID = int.Parse(Console.ReadLine());
-
-                CustomerValidate customerToValidate = new CustomerValidate();
-
-                if(customerToValidate.ValidateID(customerID))
+                do
                 {
-                    validID = true;
-                    Customer rCustomer = new Customer(customerID, storeID);
-                }
+                    CustomerValidate customerToValidate = new CustomerValidate();
+                    if (customerToValidate.ValidateID(customerID))
+                    {
+                        validID = true;
+                    }
 
-                else
-                {
-                    Console.WriteLine("Invalid ID");
-                }
+                    else
+                    {
+                        throw new ArgumentException("Invalid ID entered.");
+                        Console.WriteLine("Please enter valid customer ID: ");
+                        customerID = int.Parse(Console.ReadLine());
+                    }
+                } while (!validID);
                     
             }
 
@@ -75,8 +77,6 @@ namespace joshford_project0
                 customerFirstName = Console.ReadLine();
                 Console.WriteLine("Please enter your last name: ");
                 customerLastName = Console.ReadLine();
-
-                Customer nCustomer = new Customer(customerFirstName, customerLastName);
 
                 validID = true;
             }

@@ -23,10 +23,16 @@ namespace joshford_project0
         /// <returns> boolean idIsValid </returns>
         public bool ValidateID(int idToValidate)
         {
-            DataAccess_Library dataAccess = new DataAccess_Library();
             var context = new joshfordproject0Context();
 
             context = DataAccess_Library.OpenDatabaseConnection();
+
+            if(idToValidate.Equals(context.Customers
+                .Select(x => x.CustomerId)
+                .Where(x => x.Equals(idToValidate))))
+            {
+                idIsValid = true;
+            }
 
             return idIsValid;
         }

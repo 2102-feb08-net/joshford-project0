@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace joshford_project0.Library
+namespace joshford_project0.Database
 {
     public partial class Product
     {

@@ -5,4 +5,7 @@
     <RootNamespace>joshford_project0.Library</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\joshford-project0.Database\joshford-project0.Database.csproj" />
+  </ItemGroup>
 </Project>

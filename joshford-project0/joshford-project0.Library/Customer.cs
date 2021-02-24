@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using joshford_project0.Library;
+using System.Collections.Generic;
+using joshford_project0.Database;
 
 namespace joshford_project0
 {
@@ -19,7 +19,6 @@ namespace joshford_project0
             _custFirstName = FormatCustomerName(custFirstName);
             _custLastName = FormatCustomerName(custLastName);
             _custID = CreateCustomerID();
-            AddNewCustomer();
         }
 
         // Constructor for returning customer with customer and store id
@@ -109,13 +108,13 @@ namespace joshford_project0
         ///     customer table, then sets the local customerID from
         ///     the SQL customer table
         /// </summary>
-        private void AddNewCustomer()
+        private void AddNewCustomer(Customer customerToAdd)
         {
             var context = new joshfordproject0Context();
 
             context = DataAccess_Library.OpenDatabaseConnection();
 
-            context.Customers.Add();
+            context.Customers.Add(customerToAdd);
         }
     }
 }

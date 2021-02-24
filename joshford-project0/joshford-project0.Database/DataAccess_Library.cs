@@ -3,7 +3,7 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace joshford_project0.Library
+namespace joshford_project0.Database
 {
     public class DataAccess_Library
     {

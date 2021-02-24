@@ -6,20 +6,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace joshford_project0
 {
-    public class Customer
+    public class CustomerC
     {
         private int _custID = 0;
-        private int _storeID = 0;
+        private int _storeID = 1;       // 1 is the main store location
         private string _custFirstName;
         private string _custLastName;
         private int _phoneNumber;
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
 
         // Constructor for new customer with no store id or records
-        public Customer() { }
+        public CustomerC() { }
 
         // Constructor for returning customer with customer and store id
-        public Customer(int custID)
+        public CustomerC(int custID)
         {
             _custID = custID;
 
@@ -112,11 +112,16 @@ namespace joshford_project0
             _custID = CreateCustomerID();
 
             using var context = new joshfordproject0Context(s_dbContextOptions);
-            Customer customer = new Customer(_custID);
-            customer.CustFirstName = custFirstName;
-            customer.CustLastName = custLastName;
+            var customer = new Customer
+            {
+                CustomerId = _custID,
+                CustomerFirstName = _custFirstName,
+                CustomerLastName = _custLastName,
+                StoreId = _storeID
+            };
 
             context.Customers.Add(customer);
+
             context.SaveChanges();
 
             return _custID;

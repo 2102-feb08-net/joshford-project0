@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace joshford_project0
 {
-    public class Order
+    public class OrderC
     {
         private List<CoffeeTypes> customerCoffee = new List<CoffeeTypes>();
         private List<FoodTypes> customerFood = new List<FoodTypes>();
@@ -15,10 +15,10 @@ namespace joshford_project0
         private int _employeeID;
         private int _storeID;
         private DateTime currentDate;
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
 
 
-        public Order(int custID, int emplID, int storeID)
+        public OrderC(int custID, int emplID, int storeID)
         {
             _customerID = custID;
             _employeeID = emplID;
@@ -51,7 +51,7 @@ namespace joshford_project0
             Coffee coffee = new Coffee();
 
             customerCoffee.Add(coffeeProduct);
-            this.AddToTotalOrderPrice(coffee.GetProductPrice(coffeeProduct) * quantity);
+            //this.AddToTotalOrderPrice(coffee.GetProductPrice(coffeeProduct) * quantity);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace joshford_project0
             Food food = new Food();
 
             customerFood.Add(foodProduct);
-            this.AddToTotalOrderPrice(food.GetProductPrice(foodProduct));
+            
         }
 
         /// <summary>
@@ -91,6 +91,24 @@ namespace joshford_project0
         }
 
         /// <summary>
+        /// Print the store Menu
+        /// </summary>
+        public static void PrintMenu()
+        {
+            using var context = new joshfordproject0Context(s_dbContextOptions);
+
+            IQueryable<Product> menu = context.Products
+                .Include(x => x.ProductName)
+                .Include(x => x.ProductPrice)
+                .OrderBy(x => x.ProductName);
+
+            foreach (Product product in menu)
+            {
+                Console.WriteLine($"{product.ProductName}: $ {product.ProductPrice}");
+            }
+        }
+
+        /// <summary>
         /// Finalizes the placed order by removing given products from the stores
         ///     inventory, adding order to Orders table and Employees/Customers
         ///     history tables
@@ -98,10 +116,17 @@ namespace joshford_project0
         public void PlaceOrder()
         {
             using var context = new joshfordproject0Context(s_dbContextOptions);
+            var order = new Order
+            {
+                CustomerId = _customerID,
+                EmployeeId = _employeeID,
+                StoreId = _storeID,
+                OrderTotal = _currentOrderTotal
+            };
 
-            
+            context.Orders.Add(order);
 
-            //context.Orders;
+            context.SaveChanges();
         }
     }
 }

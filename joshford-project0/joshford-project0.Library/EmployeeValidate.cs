@@ -9,7 +9,7 @@ namespace joshford_project0
     public class EmployeeValidate
     {
         bool idIsValid = false;
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
 
         /// <summary>
         /// Employee Validation constructor

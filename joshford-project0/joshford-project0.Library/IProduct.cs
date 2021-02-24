@@ -8,6 +8,6 @@ namespace joshford_project0
 
         public void CheckProductInventory(Enum productToCheck);
 
-        public double GetProductPrice(Enum productToPrice);
+        public void GetProductPrice(Enum productToPrice);
     }
 }

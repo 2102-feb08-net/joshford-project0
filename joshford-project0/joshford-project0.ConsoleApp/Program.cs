@@ -8,9 +8,15 @@ namespace joshford_project0
 {
     class Program
     {
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
 
         public static void Main(string[] args)
+        {
+            DataAccess_Library.OpenDatabaseConnection();
+            DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
+            RunUI(s_dbContextOptions);
+        }
+
+        public static void RunUI(DbContextOptions<joshfordproject0Context> s_dbContextOptions)
         {
             // Let do this thing
             bool validID = false;           
@@ -37,8 +43,8 @@ namespace joshford_project0
 
                 if (newOrReturn != "N" && newOrReturn != "S")
                 {
-                    Console.WriteLine("Invalid Input.");
-                    Console.WriteLine(" Please select option from menu below");
+                    Console.WriteLine("\tInvalid Input.");
+                    Console.WriteLine("\tPlease select option from menu below");
                     Console.WriteLine("\t*N: New Customer\n\t*S: Sign In");
                 }
 
@@ -66,8 +72,8 @@ namespace joshford_project0
 
                     else
                     {
-                        Console.WriteLine("Invalid customer ID entered.");
-                        Console.WriteLine("Please enter a valid customer ID: ");
+                        Console.WriteLine("\tInvalid customer ID entered.");
+                        Console.WriteLine("\tPlease enter a valid customer ID: ");
                         customerID = int.Parse(Console.ReadLine());
                     }
                 } while (!validID);
@@ -85,7 +91,7 @@ namespace joshford_project0
                 while (!customerToValidate.ValidateName(customerFirstName))
                 {
                     Console.WriteLine("\tName cannot contain spaces");
-                    Console.WriteLine("\tPlease enter a valid name");
+                    Console.WriteLine("\tPlease enter a valid name: ");
                     customerFirstName = Console.ReadLine();
                 }
 
@@ -94,31 +100,69 @@ namespace joshford_project0
                 while (!customerToValidate.ValidateName(customerLastName))
                 {
                     Console.WriteLine("\tName cannot contain spaces");
-                    Console.WriteLine("\tPlease enter a valid name");
+                    Console.WriteLine("\tPlease enter a valid name: ");
                     customerLastName = Console.ReadLine();
                 }
 
-                Customer customerToAdd = new Customer();
-
+                CustomerC customerToAdd = new CustomerC();
                 customerToAdd.AddNewCustomer(customerFirstName, customerLastName);
-
-                validID = true;
+                if (customerToValidate.ValidateID(customerToAdd.CustID))
+                {
+                    validID = true;
+                }
+                else
+                {
+                    Console.WriteLine("--Customer Creatoin Error");
+                    validID = false;
+                }
+                
             }
 
             // Create Customer Object
-            Customer customer = new Customer(customerID);
+            CustomerC customer = new CustomerC(customerID);
 
-            Console.WriteLine("Make UI Now");
-
-            if (validID)
+            try
             {
-                // Customer UI Initiation
-                Order order = new Order(customerID, employeeID, storeID);
+                string menuSelection;
 
+                do
+                {
+                    // Customer UI Initiation
+                    OrderC order = new OrderC(customerID, employeeID, storeID);
+                    Console.WriteLine("*******************");
+                    Console.WriteLine("*   Order Menu    *");
+                    Console.WriteLine("*******************");
+                    Console.WriteLine("\t*A: Add Item to Order\n\t*E: Exit");
+                    menuSelection = Console.ReadLine().ToUpper();
+                    while (menuSelection != "C" && menuSelection != "F" && menuSelection != "E")
+                    {
+                        Console.WriteLine("\tInvalid Menu Selection.");
+                        Console.WriteLine("\tPlease choose from the following:");
+                        Console.WriteLine("\t*A: Add Item to Order\n\t*E: Exit");
+                        menuSelection = Console.ReadLine().ToUpper();
+                    }
 
-                // UI will handle Customer interaction(Print menu, get customer
-                //  order, retrieve history, etc.)
-                // LINQ SQL Queries will handle input data
+                    if (menuSelection == "A")
+                    {
+                        Console.WriteLine("*******************");
+                        Console.WriteLine("*      Menu       *");
+                        Console.WriteLine("*******************");
+                        OrderC.PrintMenu();
+                        menuSelection = Console.ReadLine();
+                    }
+                    // Validation should prevent
+                    else
+                    {
+                        Console.WriteLine("How we get here bruh");
+                    }
+
+                    order.PrintCurrentOrder();
+
+                } while (menuSelection != "E");
+            }
+            catch (ApplicationException)
+            {
+                throw new ApplicationException("\tFatal Internal Error.\n\tExiting...");
             }
             
         }

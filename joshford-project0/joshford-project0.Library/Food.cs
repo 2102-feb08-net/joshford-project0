@@ -9,7 +9,7 @@ namespace joshford_project0
     public class Food : IProduct
     {
         private List<FoodTypes> currentOrder = new List<FoodTypes>();
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
 
         /// <summary>
         /// Constructor to create a food product object, uses product interface
@@ -42,17 +42,18 @@ namespace joshford_project0
         }
 
 
-        public double GetProductPrice(Enum productToPrice)
+        public void GetProductPrice(Enum productToPrice)
         {
             using var context = new joshfordproject0Context(s_dbContextOptions);
 
-            FoodTypes foodPrice = (FoodTypes) productToPrice;
-            double priceOfFood = 0;
+            FoodTypes foodToPrice = (FoodTypes) productToPrice;
 
-            // SQL Query for food Prices
-
-            return priceOfFood;
+            var priceOfFood = context.Products
+                            .Select(x => x.ProductPrice)
+                            .Where(x => x.Equals(foodToPrice.ToString()));
+            Console.WriteLine($"{foodToPrice}: $ {priceOfFood}");
         }
+
     }
 
     public enum FoodTypes

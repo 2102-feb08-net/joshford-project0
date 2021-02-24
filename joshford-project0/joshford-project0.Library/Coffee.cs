@@ -8,8 +8,9 @@ namespace joshford_project0
 {
     public class Coffee : IProduct
     {
-        private List<CoffeeTypes> currentOrder = new List<CoffeeTypes>();
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
+        private int _prodID = 0;
+        private Dictionary<int, CoffeeTypes> currentOrder = new Dictionary<int, CoffeeTypes>();
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
 
         /// <summary>
         /// Constructor to create a coffee product object, uses product interface
@@ -22,7 +23,7 @@ namespace joshford_project0
         /// <param name="productToAdd"></param>
         public void AddProductToOrder(Enum productToAdd)
         {
-            currentOrder.Add((CoffeeTypes) productToAdd);
+            currentOrder.Add(_prodID, (CoffeeTypes) productToAdd);
         }
 
         /// <summary>
@@ -41,19 +42,23 @@ namespace joshford_project0
             Console.WriteLine($"Current amount of {coffeeInvCheck} is: {productAmount}");
         }
 
-
-        public double GetProductPrice(Enum productPrice)
+        /// <summary>
+        /// Retrieves a given products price
+        /// </summary>
+        /// <param name="productToPrice"></param>
+        public void GetProductPrice(Enum productToPrice)
         {
             using var context = new joshfordproject0Context(s_dbContextOptions);
 
-            CoffeeTypes coffeePrice = (CoffeeTypes) productPrice;
-            double priceOfCoffee = 0;
+            CoffeeTypes coffeeToPrice = (CoffeeTypes) productToPrice;
 
-            // SQL Query for coffee prices
-
-            return priceOfCoffee;
+            var priceOfCoffee = context.Products
+                .Select(x => x.ProductPrice)
+                .Where(x => x.Equals(coffeeToPrice.ToString()));
+            Console.WriteLine($"{coffeeToPrice}: $ {priceOfCoffee}");
         }
 
+        
     }
 
     public enum CoffeeTypes

@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace joshford_project0
 {
-    public class Employee
+    public class EmployeeC
     {
         private int _emplID;
         private int _storeID;
         private double _totalSalesAmount = 0.00;
         private int _totalSales = 0;
         private Dictionary<DateTime, double> _emplSales = new Dictionary<DateTime, double>();
-        static DbContextOptions<joshfordproject0Context> s_dbContextOptions;
+        static DbContextOptions<joshfordproject0Context> s_dbContextOptions = new DbContextOptions<joshfordproject0Context>();
 
-        public Employee(int emplID, int storeID)
+        public EmployeeC(int emplID, int storeID)
         {
             _emplID = emplID;
             _storeID = storeID;
@@ -58,5 +58,14 @@ namespace joshford_project0
             Console.WriteLine($"      \tTotal Sales Amount: {_totalSalesAmount}");
             return _emplSales;
         }
+
+        /*
+        public static void FindCustomerByName(CustomerC customerToFind)
+        {
+            using var context = new joshfordproject0Context(s_dbContextOptions);
+
+
+        }
+        */
     }
 }

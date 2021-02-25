@@ -47,7 +47,7 @@ CREATE TABLE Customers(
     CustomerFirstName NVARCHAR(50) NOT NULL CHECK(LEN(CustomerFirstName) > 1),
     CustomerLastName NVARCHAR(50),
     StoreID INT,
-    PhoneNumber INT CHECK(LEN(PhoneNumber) = 9)
+    PhoneNumber INT
 CONSTRAINT Customers_PK PRIMARY KEY(CustomerID)
 CONSTRAINT CustomersToStores_FK FOREIGN KEY(StoreID)
 REFERENCES Stores(StoreID)
@@ -188,6 +188,17 @@ INSERT INTO StoreInventory VALUES ( 13, 50, 3);
 INSERT INTO StoreInventory VALUES ( 14, 50, 3);
 INSERT INTO StoreInventory VALUES ( 15, 50, 3);
 INSERT INTO StoreInventory VALUES ( 16, 50, 3);
+
+INSERT INTO Customers VALUES ('Joshua', 'Ford', 1, NULL);
+
+INSERT INTO Orders VALUES (4, 2, 1, 4.99);
+
+SELECT * FROM Customers;
+
+-- Delete rows from table '[TableName]' in schema '[dbo]'
+DELETE FROM joshford_project0.Customers
+
+
 
 /****************************************
 *       Drop Database Tables            *

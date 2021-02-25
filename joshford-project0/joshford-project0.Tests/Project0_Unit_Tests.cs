@@ -27,11 +27,11 @@ namespace joshford_project0
             OrderC expected = new OrderC(1, 1, 1);
             CoffeeTypes coffeeProduct = CoffeeTypes.Regular;
             int coffeeQuantity = 1;
-            expected.AddCoffeeToOrder(coffeeProduct, coffeeQuantity);
+            expected.AddProductToOrder(coffeeProduct, coffeeQuantity);
 
             // Act
             OrderC actual = new OrderC(1, 1, 1);
-            actual.AddCoffeeToOrder(CoffeeTypes.Regular, 1);
+            actual.AddProductToOrder(CoffeeTypes.Regular, 1);
 
             // Assert
             Assert.Equal(expected, actual);

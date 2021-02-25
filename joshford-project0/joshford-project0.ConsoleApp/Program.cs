@@ -13,13 +13,14 @@ namespace joshford_project0
         public static void Main(string[] args)
         {
             // Let do this thing
-            bool validID = false;           
-            bool validResponse = false;     
-            string newOrReturn;             
-            string customerFirstName;       
-            string customerLastName;             
-            int customerID = 0;             
-            int employeeID = 0;             
+            bool validID = false;
+            bool validResponse = false;
+            string newOrReturn;
+            int menuOptions = 16;
+            string customerFirstName;
+            string customerLastName;
+            int customerID = 0; 
+            int employeeID = 0; 
             int storeID = 0;
 
             // Database Connection is established
@@ -145,6 +146,26 @@ namespace joshford_project0
                         Console.WriteLine("*******************");
                         OrderC.PrintMenu();
                         menuSelection = Console.ReadLine();
+                        while (menuOptions < int.Parse(menuSelection) && int.Parse(menuSelection) < 0)
+                        {
+                            Console.WriteLine("\tInvalid Menu Selection");
+                            Console.WriteLine("\tPlease select from the following:");
+                            OrderC.PrintMenu();
+                            menuSelection = Console.ReadLine();
+                        }
+                        var productSelection = OrderC.GetProductSelection(menuSelection);
+                        if (productSelection.GetType().Equals(CoffeeTypes.Regular))
+                        {
+                            order.AddProductToOrder((CoffeeTypes) productSelection, 1);
+                        }
+                        else
+                        {
+                            order.AddProductToOrder((FoodTypes) productSelection, 1);
+                        }
+                    }
+                    else if(menuSelection == "E")
+                    {
+                        Console.WriteLine("Thanks for stopping by!");
                     }
                     // Validation should prevent
                     else
